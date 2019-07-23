@@ -1,7 +1,7 @@
 module.exports = {
     create: (req, res) => {
         const db = req.app.get('db');
-        const { email, password } = req.body
+        const { email, password } = req.body;
         const users = {
             id: db.users.id,
             email,
@@ -25,6 +25,19 @@ module.exports = {
                 data: db.profiles.data
             }
         })
+        res.status(200).send(db);
+    },
+
+    update: (req, res) => {
+        const db = req.app.get('db');
+        const { thumbnail, about } = req.body;
+
+        var updateProfile = db.profiles.data.find((user) => user.userId === parseInt(req.params.userId));
+        Object.assign(updateProfile, {
+            thumbnail,
+            about
+        });
+
         res.status(200).send(db);
     }
 
