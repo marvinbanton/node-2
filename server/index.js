@@ -1,4 +1,6 @@
 const express = require('express');
+const bodyParser = require('body-parser')
+const mu = require('./controllers/manageUser.js')
 
 const app = express();
 
@@ -45,6 +47,13 @@ const db = {
 };
 
 app.set('db', db)
+app.use(bodyParser.urlencoded({ extended: false }))
+
+app.post('/sign-up', mu.create);
+
+app.get('/debug', (req, res) => {
+    res.status(200).json(req.app.get('db'))
+});
 
 const PORT = 3000;
 
