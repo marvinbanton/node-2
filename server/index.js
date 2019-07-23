@@ -1,6 +1,7 @@
 const express = require('express');
-const bodyParser = require('body-parser')
-const mu = require('./controllers/manageUser.js')
+const bodyParser = require('body-parser');
+const mu = require('./controllers/manageUser.js');
+const cp = require('./controllers/createPost.js');
 
 const app = express();
 
@@ -17,12 +18,7 @@ const db = {
   },
   posts: {
     id: 0,
-    data: [
-      {
-        userId: '',
-        content: '',
-      }
-    ],
+    data: [],
   },
   comments: {
     id: 0,
@@ -42,6 +38,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 
 app.post('/sign-up', mu.create);
 app.patch('/update/:userId', mu.update);
+app.post('/post', cp.create);
 
 app.get('/debug', (req, res) => {
   res.status(200).json(req.app.get('db'))

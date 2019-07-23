@@ -32,7 +32,8 @@ module.exports = {
         const db = req.app.get('db');
         const { thumbnail, about } = req.body;
 
-        var updateProfile = db.profiles.data.find((user) => user.userId === parseInt(req.params.userId));
+        var updateProfile = db.profiles.data.find((user) =>
+            user.userId === parseInt(req.params.userId));
         Object.assign(updateProfile, {
             thumbnail,
             about
