@@ -1,7 +1,8 @@
 module.exports = {
     create: (req, res) => {
         const db = req.app.get('db');
-        const { userId, content } = req.body
+        var { userId, content } = req.body
+        userId = parseInt(userId);
         const posts = {
             userId,
             postId: db.posts.id,
@@ -14,8 +15,28 @@ module.exports = {
                 id: db.posts.id + 1,
                 data: db.posts.data
             }
-        })
+        });
+        res.status(200).send(db)
+    },
 
+    comments: (req, res) => {
+        const db = req.app.get('db');
+        var { userId, postId, comment } = req.body
+        userId = parseInt(userId);
+        postId = parseInt(postId);
+        const comments = {
+            userId,
+            postId,
+            comment,
+        }
+
+        db.comments.data.push(comments)
+        Object.assign(db, {
+            comments: {
+                id: db.comments.id + 1,
+                data: db.comments.data
+            }
+        });
         res.status(200).send(db)
     }
 

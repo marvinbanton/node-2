@@ -8,13 +8,11 @@ const app = express();
 const db = {
   users: {
     id: 0,
-    data: [
-    ],
+    data: [],
   },
   profiles: {
     id: 0,
-    data: [
-    ],
+    data: [],
   },
   posts: {
     id: 0,
@@ -22,13 +20,7 @@ const db = {
   },
   comments: {
     id: 0,
-    data: [
-      {
-        userId: '',
-        postId: '',
-        comment: '',
-      }
-    ],
+    data: [],
   },
 };
 
@@ -39,6 +31,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.post('/sign-up', mu.create);
 app.patch('/update/:userId', mu.update);
 app.post('/post', cp.create);
+app.post('/comments', cp.comments);
 
 app.get('/debug', (req, res) => {
   res.status(200).json(req.app.get('db'))
