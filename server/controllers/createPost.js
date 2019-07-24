@@ -48,6 +48,18 @@ module.exports = {
         const post = db.posts.data.filter((post) =>
             post.userId === user.id)
         res.status(200).send(post);
+    },
+
+    viewPost: (req, res) => {
+        const db = req.app.get('db');
+        const user = db.users.data.find((users) =>
+            users.id === parseInt(req.params.userId));
+
+        const post = db.posts.data.filter((post) =>
+            post.postId === post.userId)
+        res.status(200).send(post);
+
     }
+
 
 }
