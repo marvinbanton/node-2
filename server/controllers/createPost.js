@@ -40,6 +40,14 @@ module.exports = {
         res.status(200).send(db)
     },
 
-    
+    fetchPosts: (req, res) => {
+        const db = req.app.get('db');
+        const user = db.users.data.find((users) =>
+            users.id === parseInt(req.params.userId));
+
+        const post = db.posts.data.filter((post) =>
+            post.userId === user.id)
+        res.status(200).send(post);
+    }
 
 }

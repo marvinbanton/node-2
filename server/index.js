@@ -33,6 +33,7 @@ app.patch('/update/:userId', mu.update);
 app.post('/post', cp.create);
 app.post('/comments', cp.comments);
 app.get('/profile', mu.profile);
+app.get('/user/:userId/posts', cp.fetchPosts);
 
 app.get('/debug', (req, res) => {
   res.status(200).json(req.app.get('db'))
