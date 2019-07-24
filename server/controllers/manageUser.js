@@ -40,6 +40,18 @@ module.exports = {
         });
 
         res.status(200).send(db);
+    },
+
+    profile: (req, res) => {
+        const db = req.app.get('db');
+        const user = db.users.data.find((users) =>
+            users.email === req.query.email);
+        console.log(user)
+
+        const profile = db.profiles.data.find((profile) =>
+            profile.userId === user.id)
+        res.status(200).send(profile);
+
     }
 
 
